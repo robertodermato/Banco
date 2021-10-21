@@ -2,7 +2,14 @@ from abc import ABCMeta, abstractmethod
 from Banco.Erros import *
 from Banco.Moeda import *
 
-
+def saque_verboso(objeto, valor):
+    print(objeto.nome)
+    print(objeto.cpf)
+    print(objeto.numero)
+    print(objeto.balanco)
+    print(objeto.taxa_de_rendimento)
+    objeto.saque(valor)
+    print(objeto.balanco)
 
 class ContaBancaria (metaclass=ABCMeta):
     """Classe abstrata da conta bancária"""
