@@ -40,26 +40,26 @@ for individuo in individuos:
             elif comandos[i][0] == "sacar":
                 saque = comandos[i][1].strip().split(" ")
                 if saque[0] == "contaInvestimento":
-                    print ("sacando da conta inv")
+                    print ("Sacando da conta investimento")
                     conta_inv_teste.saque(float(saque[2]))
                 elif saque[0] == "contaPoupanca":
-                    print("sacando da conta poup")
+                    print("Sacando da conta poupança")
                     conta_poup_teste.saque(float(saque[2]))
                 elif saque[0] == "contaCorrente":
-                    print("sacando da conta corre")
+                    print("Sacando da conta corrente")
                     conta_corr_teste.saque(float(saque[2]))
 
             # Depositando valores
             elif comandos[i][0] == "depositar":
                 deposito = comandos[i][1].strip().split(" ")
                 if deposito [0]  == "contaInvestimento":
-                    print("depositando da conta inv")
+                    print("Depositando na conta investimento")
                     conta_inv_teste.deposito(float(deposito[2]))
                 elif deposito [0]  == "contaPoupanca":
-                    print("depositando da conta poup")
+                    print("Depositando na conta poupança")
                     conta_poup_teste.deposito(float(deposito[2]))
                 elif deposito [0]  == "contaCorrente":
-                    print("depositando da conta corr")
+                    print("Depositando na conta corrente")
                     conta_corr_teste.deposito(float(deposito[2]))
 
 
@@ -76,7 +76,17 @@ for individuo in individuos:
             # Consultando rendimentos
             elif comandos[i][0] == "rendimento":
                 rendimentos = comandos[i][1].strip().split(" ")
-                print ("Rendimento", rendimentos)
+                tipo_conta = rendimentos[0]
+                qtidade_dias = rendimentos[2]
+                if tipo_conta == "contaCorrente":
+                    print ("Vendo rendimento de", qtidade_dias, "dias da", tipo_conta)
+                    print ("O rendimento é:", conta_corr_teste.consulta_rendimento(int(qtidade_dias)))
+                elif tipo_conta == "contaPoupanca":
+                    print ("Vendo rendimento de", qtidade_dias, "dias da", tipo_conta)
+                    print("O rendimento é:", conta_poup_teste.consulta_rendimento(int(qtidade_dias)))
+                elif tipo_conta == "contaInvestimento":
+                    print ("Vendo rendimento de", qtidade_dias, "dias da", tipo_conta)
+                    print("O rendimento é:", conta_inv_teste.consulta_rendimento(int(qtidade_dias)))
 
 # criado para demonstrar alguns erros e algumas funções
 try:
@@ -96,7 +106,10 @@ try:
     print ("O rendimento em 30 dias da conta 1 é de: R$ " + str(conta1.consulta_rendimento(30)))
     print ("O rendimento em 30 dias da conta 2 é de: R$ " + str(conta1.consulta_rendimento(30)))
     print ("O rendimento em 30 dias da conta 3 é de: R$ " + str(conta1.consulta_rendimento(30)))
-    print ("Saque verboso", ContaBancaria.saque_verboso(conta1, 30))
+    print ("Realizando saque verboso")
+    ContaBancaria.saque_verboso(conta1, 30)
+
+
     # Alguns testes de erros. Deixei para mostrar que funcionam
 
     #print ("Tentando depositar R$ -30 na conta 1")

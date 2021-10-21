@@ -9,6 +9,8 @@ class Moeda:
     def __add__(self, outro):
         if isinstance(outro, float):
             novo_valor = self.valor + outro
+        elif isinstance(outro, int):
+            novo_valor = self.valor + outro
         else:
             novo_valor = self.valor + outro.valor
         return novo_valor
@@ -22,6 +24,8 @@ class Moeda:
 
     def __sub__(self, outro):
         if isinstance(outro, float):
+            novo_valor = self.valor - outro
+        elif isinstance(outro, int):
             novo_valor = self.valor - outro
         else:
             novo_valor = self.valor - outro.valor

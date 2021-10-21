@@ -2,14 +2,10 @@ from abc import ABCMeta, abstractmethod
 from Banco.Erros import *
 from Banco.Moeda import *
 
-
-
 class ContaBancaria (metaclass=ABCMeta):
     """Classe abstrata da conta bancária"""
 
     quantidade_contas = 0
-
-
 
     @classmethod
     def status_contas(cls):
@@ -72,15 +68,10 @@ class ContaBancaria (metaclass=ABCMeta):
             self.balanco = self.balanco - valor
             print ("Saque de " + str(valor) + " realizado com sucesso.")
 
-    @staticmethod
     def saque_verboso(objeto, valor):
-        if valor < 0:
-            raise ValorMonetarioNegativo(valor)
-        elif valor > objeto.saldo:
-            raise SaldoInsuficiente(valor)
-        else:
-            objeto.saldo = objeto.saldo - valor
-            print("Saque de " + str(valor) + " realizado com sucesso.")
+        print("Saque verboso de", objeto.nome, "- CPF:", objeto.cpf, "- Número da conta:", objeto.numero, "- Saldo:", objeto.balanco, "- Rendimento:", objeto.taxa_de_rendimento)
+        objeto.saque(valor)
+        print("Saldo final:", objeto.balanco)
 
     @property
     def saldo (self):
@@ -143,14 +134,17 @@ class ContaInvestimento(ContaBancaria):
         super().__init__(numero, nome, cpf, balanco)
         self.risco = risco.strip().lower()
         ContaInvestimento.incrementa_qtidade_contas()
-
-        if risco == "baixo":
+        self.taxa_de_rendimento = 0
+        #print ("testando rendimento", risco)
+        if risco == " baixo" or risco == " Baixo":
+            #print ("Risco baixo rendimento")
             self.taxa_de_rendimento = 0.1
-        if risco == "médio" or risco == "medio":
+        if risco == " médio" or risco == " medio" or risco == " Medio" or risco == " Médio":
+            #print("Risco médio rendimento")
             self.taxa_de_rendimento = 0.25
-        if risco == "alto":
+        if risco == " alto" or risco == " Alto":
+            #print("Risco alto rendimento")
             self.taxa_de_rendimento = 0.5
-
 
 
     def consulta_rendimento (self, dias):
